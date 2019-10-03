@@ -34,8 +34,15 @@ You may as well also install the Heltec board variant too.  Instructions here: h
 
 ### Wiring the Heltec WiFi LoRa 32 or TTGO LoRa 32 modules
 
+The pre-built modules often have pin D2 of their SX1278 chip attached to GPIO pin 32.  Pin 32 on an ESP32 is input-only, and is useless for our purposes when we're trying to use it to send the modulation signal into the FSK modem.  You'll need to run a jumper wire from pin 32 to the pin defined in RADIO_MOD_AL.  At the moment, this is set to GPIO12.  You can change it if you like, but I picked this pin because it is more or less empty otherwise and easy to reach from pin 32.  In the TTGO LoRa32 V2 module, pin DIO2 is just dangling off of the edge of the board somewhere, and not really attached to anything as far as I can tell.  You'll also need to run a jumper wire for this arrangement.  Connect the following points on the board.
 
-... the schematic for a home-built version should probably work as shown.
+For the **Heltec WiFi LoRa V2**, probably the **WiFi LoRa V1**, and the **TTGO LoRa32 V1** modules: 32 -> 12
+
+For the **TTGO LoRa32 V2**: LoRa_DIO2 (which is apparently separate on the board) -> 12
+
+... the schematic for a component-bulit version shows DIO2 connected to pin 12 and should work as shown.
+
+Nothing here will prevent you from programming the sketch into an empty board, but you won't get FM from it until you connect pin DIO2 to the right place.
 
 ### Starting the beacon for the first time
 
