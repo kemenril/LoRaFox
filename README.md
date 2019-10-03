@@ -49,7 +49,7 @@ Nothing here will prevent you from programming the sketch into an empty board, b
 When the beacon is first started, no configuration information will be available.  The transmitter will be disabled automatically, and the call will be set *N0CALL*.  The SPIFFS filesystem will be initialized, so the initial start might take a few seconds.  Please don't run the beacon like this.  It's uncivil.
 
 ### Configuring the beacon using the serial interface
-   **Warning:** There is a minor bug in the handling of the flash button vs. some of the hardware attached to the USB serial driver.  I suspect it's hardware related.  When you're working with the serial port, the button occasionally appears to become stuck down.  For this reason, you probably don't actually want to run the beacon with a terminal program attached to its serial port.  Plugging it in for programming should be fine, and a reset will clear the condition.
+   **Warning:** There is a minor bug in the handling of the flash button vs. some of the hardware attached to the USB serial driver.  I suspect it's hardware related.  When you're working with the serial port, the flash button occasionally appears to become stuck down.  For this reason, you probably don't actually want to run the beacon with a terminal program attached to its serial port.  Plugging it in for programming should be fine, and a reset will clear the condition.
    
 Plug the beacon into a USB port and connect a serial terminal with the following settings:
 
@@ -59,9 +59,9 @@ Plug the beacon into a USB port and connect a serial terminal with the following
    * Stop Bits: **1**
    * Local Echo: **On** if you can do it.  Otherwise you probably won't see what you're typing.
 
-After the call is displayed on the screen, hit a button on the keyboard a few times, *return* will be fine.  You should see a prompt.  Take its advice and press **?** for help.
+After the call is displayed on the OLED screen, hit a button on the connected computer's keyboard a few times, *return* will be fine.  You should see a prompt.  Take its advice and press **?** for help.
 
-Take a look at the current settings by hitting **P**.
+Take a look at the current beacon settings by hitting **P**.
 
 Now you'll want to hit a key to change one of a few options:
    * **B**eacon message
@@ -71,12 +71,12 @@ Now you'll want to hit a key to change one of a few options:
    * **M**ode
    * **O**utput power
    
-Get everything set the way you like, and then consider saving the preset by pressing **S**.  You can name the preset any reasonable thing you like, but if you call it *Default*, the beacon will load it automatically during startup, even if it's not the first preset on the list.  It will also start with the radio on and transmit the **I**nit message.
+Get everything set the way you like, and then consider saving the preset by pressing **S**.  You will be prompted for a name.  You can name the preset any reasonable thing you like, but if you call it *Default*, the beacon will load it automatically during startup, even if it's not the first preset on the list.  It will also start with the radio on and transmit the **I**nit message.  If there is no *Default* preset, the first preset saved will be loaded, but the beacon will start disabled.
 
-Feel free to put in as many different presets as you like, and then either reset your beacon, or at least hit **X** to get out of the command interpreter.  The beacon will not operate while it's running the command-line.
+The beacon can store a very large number of presets in flash, practically limited only by your willingness to manage them.  Feel free to put in as many as you like.  Once you're done with the configuration, either reset your beacon, or at least hit **X** to get out of the command interpreter.  The beacon will not operate while it's running the command-line.
    
 
 ### Using the beacon
 
-The beacon can store a very large number of presets in flash, practically limited only by your willingness to manage them.  A quick press of the *flash* button on the microcontroller board will enable or disable the beacon's transmitter.  A long press on the button (a couple seconds or so) will load the next preset in the list.  
+Just apply power to it.  Once it's on, a quick press of the *flash* button on the microcontroller board will enable or disable the beacon's transmitter.  A long press on the button (a couple seconds or so) will load the next preset in the list.  
 
