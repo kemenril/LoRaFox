@@ -46,7 +46,7 @@ Nothing here will prevent you from programming the sketch into an empty board, b
 
 ### Starting the beacon for the first time
 
-When the beacon is first started, no configuration information will be available.  The transmitter will be disabled automatically, and the call will be set *N0CALL*.  The SPIFFS filesystem will be initialized, so the initial start might take a few seconds.
+When the beacon is first started, no configuration information will be available.  The transmitter will be disabled automatically, and the call will be set *N0CALL*.  The SPIFFS filesystem will be initialized, so the initial start might take a few seconds.  Please don't run the beacon like this.  It's uncivil.
 
 ### Configuring the beacon using the serial interface
    **Warning:** There is a minor bug in the handling of the flash button vs. some of the hardware attached to the USB serial driver.  I suspect it's hardware related.  When you're working with the serial port, the button occasionally appears to become stuck down.  For this reason, you probably don't actually want to run the beacon with a terminal program attached to its serial port.  Plugging it in for programming should be fine, and a reset will clear the condition.
@@ -57,11 +57,24 @@ Plug the beacon into a USB port and connect a serial terminal with the following
    * Parity: **None**
    * Data Bits: **8**
    * Stop Bits: **1**
-   * Local Echo: **On**
+   * Local Echo: **On** if you can do it.  Otherwise you probably won't see what you're typing.
 
 After the call is displayed on the screen, hit a button on the keyboard a few times, *return* will be fine.  You should see a prompt.  Take its advice and press **?** for help.
 
 Take a look at the current settings by hitting **P**.
+
+Now you'll want to hit a key to change one of a few options:
+   * **B**eacon message
+   * **C**allsign
+   * **D**elay between transmissions
+   * **F**requency
+   * **M**ode
+   * **O**utput power
+   
+Get everything set the way you like, and then consider saving the preset by pressing **S**.  You can name the preset any reasonable thing you like, but if you call it *Default*, the beacon will load it automatically during startup, even if it's not the first preset on the list.  It will also start with the radio on and transmit the **I**nit message.
+
+Feel free to put in as many different presets as you like, and then either reset your beacon, or at least hit **X** to get out of the command interpreter.  The beacon will not operate while it's running the command-line.
+   
 
 ### Using the beacon
 
