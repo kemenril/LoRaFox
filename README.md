@@ -52,7 +52,9 @@ Plug the beacon into a USB port and connect a serial terminal with the following
    * Stop Bits: **1**
    * Local Echo: **On**
 
-After the call is displayed on the screen, hit a button on the keyboard a few times, *return* will be fine.  You should see a prompt.
+After the call is displayed on the screen, hit a button on the keyboard a few times, *return* will be fine.  You should see a prompt.  Take its advice and press **?** for help.
+
+Take a look at the current settings by hitting **P**.
 
 ### Using the beacon
 
