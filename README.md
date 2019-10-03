@@ -42,13 +42,15 @@ You may as well also install the Heltec board variant too.  Instructions here: h
 When the beacon is first started, no configuration information will be available.  The transmitter will be disabled automatically, and the call will be set *N0CALL*.  The SPIFFS filesystem will be initialized, so the initial start might take a few seconds.
 
 ### Configuring the beacon using the serial interface
-
+   **Warning:** There is a minor bug in the handling of the flash button vs. some of the hardware attached to the USB serial driver.  I suspect it's hardware related.  When you're working with the serial port, the button occasionally appears to become stuck down.  For this reason, you probably don't actually want to run the beacon with a terminal program attached to its serial port.  Plugging it in for programming should be fine, and a reset will clear the condition.
+   
 Plug the beacon into a USB port and connect a serial terminal with the following settings:
 
    * Baud: **115200**
    * Parity: **None**
    * Data Bits: **8**
    * Stop Bits: **1**
+   * Local Echo: **On**
 
 After the call is displayed on the screen, hit a button on the keyboard a few times, *return* will be fine.  You should see a prompt.
 
