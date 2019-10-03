@@ -26,8 +26,8 @@ You may as well also install the Heltec board variant too.  Instructions here: h
    
 *Buid settings for the Arduino IDE:*
 
-   * Board: Heltec WiFi LoRa 32 V2 (probably, or you could try something else.
-   * CPU Frequency: 40Mhz (It will automatically be raised to 80 at times for responsiveness.
-   * Flash Frequency: Also 40Mhz
-   * Partition Scheme: Default 8MB (... or whatever, it doesn't use enough resources to matter)
+   * Board: **Heltec WiFi LoRa 32 V2** (probably, or you could try something else.
+   * CPU Frequency: **40Mhz** (It will automatically be raised to 80 at times for responsiveness.
+   * Flash Frequency: Also **40Mhz**
+   * Partition Scheme: **Default 8MB** (... or whatever, it doesn't use enough resources to matter)
 
