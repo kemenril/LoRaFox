@@ -1,0 +1,8 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP NodeMCU_ESP32
+D NodeMCU ESP32
+K connector
+$ENDCMP
+#
+#End Doc Library

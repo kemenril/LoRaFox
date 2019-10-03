@@ -1,0 +1,8 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP SSD1306_I2C
+D Connector, single row, 01x04, pin header
+K connector
+$ENDCMP
+#
+#End Doc Library
