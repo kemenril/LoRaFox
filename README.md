@@ -13,8 +13,9 @@ A simple fox-hunt beacon built with an ESP32 microcontroller and an SX1278 LoRa 
    * *U8x8* for the display.
    * *Radiolib* for the transceiver.
    
-... and the Arduino ESP32 core.  Installations for the core can be found here: https://github.com/espressif/arduino-esp32
 You may install the required libraries through the Arduino library manager.
+
+You will also want at least the Arduino ESP32 core.  Installations for the core can be found here: https://github.com/espressif/arduino-esp32
 
 You may as well also install the Heltec board variant too.  Instructions here: https://docs.heltec.cn/#/en/user_manual/how_to_install_esp32_Arduino
 
