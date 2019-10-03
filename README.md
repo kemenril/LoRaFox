@@ -16,9 +16,11 @@ A simple fox-hunt beacon built with an ESP32 microcontroller and an SX1278 LoRa 
 You may install the required libraries through the Arduino library manager.
 
 You will also want at least the Arduino ESP32 core.  Instructions for installing the core can be found here: 
+
 https://github.com/espressif/arduino-esp32
 
 You may as well also install the Heltec board variant too.  Instructions here: 
+
 https://docs.heltec.cn/#/en/user_manual/how_to_install_esp32_Arduino
 
 ### Supported hardware:
@@ -80,5 +82,5 @@ The beacon can store a very large number of presets in flash, practically limite
 
 ### Using the beacon
 
-Just apply power to it.  Once it's on, a quick press of the *flash* button on the microcontroller board will enable or disable the beacon's transmitter.  A long press on the button (a couple seconds or so) will load the next preset in the list.  You could pretty easily add a battery in a few different ways.  If you're using one of the prebuilt boards, you will have a lipo battery charger built in.  I'm using a 600mAh lipo cell with mine, and based on some rough calculations and power draw tests I think I should have a bit longer than 50 hours of runtime, even on high power.  This all depends on transmitter duty cycle and so on. 
+Just apply power to it.  Once it's on, a quick press of the *flash* button on the microcontroller board will enable or disable the beacon's transmitter.  A long press on the button (a couple seconds or so) will load the next preset in the list.  You could pretty easily add a battery in a few different ways.  If you're using one of the prebuilt boards, you will have a lipo battery charger built in.  I'm using a 600mAh lipo cell with mine, and based on some rough calculations and power draw tests I think I should have a bit longer than 50 hours of runtime, even on high power.  Idle power draw is below 10mA. 
 
