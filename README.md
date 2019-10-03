@@ -32,3 +32,27 @@ You may as well also install the Heltec board variant too.  Instructions here: h
    * Flash Frequency: Also **40Mhz**
    * Partition Scheme: **Default 8MB** (... or whatever, it doesn't use enough resources to matter)
 
+### Wiring the Heltec WiFi LoRa 32 or TTGO LoRa 32 modules
+
+
+... the schematic for a home-built version should probably work as shown.
+
+### Starting the beacon for the first time
+
+When the beacon is first started, no configuration information will be available.  The transmitter will be disabled automatically, and the call will be set *N0CALL*.  The SPIFFS filesystem will be initialized, so the initial start might take a few seconds.
+
+### Configuring the beacon using the serial interface
+
+Plug the beacon into a USB port and connect a serial terminal with the following settings:
+
+   * Baud: **115200**
+   * Parity: **None**
+   * Data Bits: **8**
+   * Stop Bits: **1**
+
+After the call is displayed on the screen, hit a button on the keyboard a few times, *return* will be fine.  You should see a prompt.
+
+### Using the beacon
+
+The beacon can store a very large number of presets in flash.  A quick press of the *flash* button on the microcontroller board will enable or disable the beacon's transmitter.  A long press on the button (a couple seconds or so) will load the next preset in the list.  
+
