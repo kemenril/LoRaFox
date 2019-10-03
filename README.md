@@ -56,5 +56,5 @@ After the call is displayed on the screen, hit a button on the keyboard a few ti
 
 ### Using the beacon
 
-The beacon can store a very large number of presets in flash.  A quick press of the *flash* button on the microcontroller board will enable or disable the beacon's transmitter.  A long press on the button (a couple seconds or so) will load the next preset in the list.  
+The beacon can store a very large number of presets in flash, practically limited only by your willingness to manage them.  A quick press of the *flash* button on the microcontroller board will enable or disable the beacon's transmitter.  A long press on the button (a couple seconds or so) will load the next preset in the list.  
 
