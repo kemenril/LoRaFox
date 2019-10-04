@@ -46,6 +46,7 @@ U8X8_SSD1306_128X64_VCOMH0_SW_I2C u8x8(OLED_SCL, OLED_SDA, OLED_RST);
 //CW modulation frequency in Hz.
 #define TONE_FREQ 960
 
+
 //Minimum delay between transmissions of a certain type.  Any setting below this is considered to be disabled.
 #define DELAY_MIN 10000
 
@@ -56,7 +57,8 @@ U8X8_SSD1306_128X64_VCOMH0_SW_I2C u8x8(OLED_SCL, OLED_SDA, OLED_RST);
 #define RADIO_DIO2  34
 
 //DIO2 is hard-wired to an input-only pin on the Heltec.
-//  It's jumpered over here for FM.
+//  It's jumpered over here for FM.  Pin 12 works on the Heltec WiFi LoRa V2
+//#define RADIO_MOD_ALT 13
 #define RADIO_MOD_ALT 12
 
 //Modes available
@@ -77,10 +79,26 @@ char screen_on = 0;
 //Time (ms) after which to blank screen.
 #define SCREEN_OFF_TIME 60000
 
+//Define this if you're compiling for 40Mhz
+#define CPU_SCALING
+
+#ifdef CPU_SCALING
+
 //CPU frequency scaling
 #define CPU_FREQ_HIGH RTC_CPU_FREQ_80M
-//Compile this for 40Mhz or so, which is all that's needed.
+
+//Compile this for 40Mhz or so, or disable scaling.  20Mhz is too low.
 #define CPU_FREQ_LOW  RTC_CPU_FREQ_XTAL
+
+//Scale vs. -- I think -- 80Mhz.  Probably don't go below 40Mhz, or .5
+//Hardware limitations begin to cause trouble there.  
+#define CPU_SCALE   0.5
+
+#else
+//CPU Scaling is disabled
+#define CPU_SCALE   1
+#endif
+
 
 //Are we in the command shell?
 //This is important because we shouldn't change the CPU speed while the serial connection is active.
@@ -135,9 +153,6 @@ char confFN[FNSIZE];
 
 //Longest wait time without checking to abort the wait.
 #define WAIT_MS     70
-//Scale vs. -- I think -- 80Mhz.  Probably don't go below 40Mhz, or .5
-//Hardware limitations begin to cause trouble there.  
-#define CPU_SCALE   0.5
 #define WAIT_SLICE  (WAIT_MS*CPU_SCALE)
 
 
@@ -182,20 +197,28 @@ char wait(int msec,char progress) {
 
 //Radio on and off
 void radOn() {
-  if (!shell)
-    rtc_clk_cpu_freq_set(CPU_FREQ_HIGH);
+  #ifdef CPU_SCALING
+    if (!shell)
+     rtc_clk_cpu_freq_set(CPU_FREQ_HIGH);
+  #endif  
   u8x8.drawGlyph(1,6,' ');
-  if (!shell)
-    rtc_clk_cpu_freq_set(CPU_FREQ_LOW);
+  #ifdef CPU_SCALING
+    if (!shell)
+      rtc_clk_cpu_freq_set(CPU_FREQ_LOW);
+  #endif
   keyup();
   radstate = 1;
 }
 void radOff() {
-  if (!shell)
-    rtc_clk_cpu_freq_set(CPU_FREQ_HIGH);
+  #ifdef CPU_SCALING
+    if (!shell)
+     rtc_clk_cpu_freq_set(CPU_FREQ_HIGH);
+  #endif
   u8x8.drawGlyph(1,6,'!');
-  if (!shell)
-    rtc_clk_cpu_freq_set(CPU_FREQ_LOW);
+  #ifdef CPU_SCALING
+    if (!shell)
+     rtc_clk_cpu_freq_set(CPU_FREQ_LOW);
+  #endif
   keyup();
   radstate = 0;
 }
@@ -295,13 +318,16 @@ int radio_reset() {
   char tmp[18];
   int err;
 
-  if (!shell)
-    rtc_clk_cpu_freq_set(CPU_FREQ_HIGH);  //Do this quickly.
+  #ifdef CPU_SCALING
+    if (!shell)
+      rtc_clk_cpu_freq_set(CPU_FREQ_HIGH);  //Do this quickly.
+  #endif
 
   //Needs to be done before keyup, because keyup also sets the tone frequency.
   ledcSetup(0,8000,8); //PWM channel 0, 8Khz sample, 8 bits.
   ledcAttachPin(RADIO_MOD_ALT,0);
   pinMode(RADIO_MOD_ALT,OUTPUT);
+
   keyup();
   u8x8.drawGlyph(14,4,RADIO_INIT);
   sprintf(&(tmp[0]),"%0.3f Mhz",config.frequency);
@@ -332,8 +358,10 @@ int radio_reset() {
   if (err == ERR_NONE)
     u8x8.drawGlyph(14,4,' ');
 
-  if (!shell)
-    rtc_clk_cpu_freq_set(CPU_FREQ_LOW);
+  #ifdef CPU_SCALING
+    if (!shell)
+      rtc_clk_cpu_freq_set(CPU_FREQ_LOW);
+  #endif
   return err;
 }
 
@@ -810,9 +838,13 @@ void prg_button(unsigned long tval) {
       if (tval - buttonDown > LONG_PRESS_TIME) {
         if (!flip) {
           flip = 1;
-          rtc_clk_cpu_freq_set(CPU_FREQ_HIGH);
+          #ifdef CPU_SCALING
+            rtc_clk_cpu_freq_set(CPU_FREQ_HIGH);
+          #endif
           u8x8.drawGlyph(15,6,PRESET_NEXT);
-          rtc_clk_cpu_freq_set(CPU_FREQ_LOW);
+          #ifdef CPU_SCALING
+            rtc_clk_cpu_freq_set(CPU_FREQ_LOW);
+          #endif
         }
       }      
     } else {
@@ -824,9 +856,13 @@ void prg_button(unsigned long tval) {
       if (!screen_on) {screenOn();flip=0;} else { //Button up.  Turn screen on, or
         if (flip) {  //Hold button for a while.
          //Turn off indicator PRESET_NEXT
-         rtc_clk_cpu_freq_set(CPU_FREQ_HIGH);
+         #ifdef CPU_SCALING
+          rtc_clk_cpu_freq_set(CPU_FREQ_HIGH);
+         #endif
          u8x8.drawGlyph(15,6,' ');
-         rtc_clk_cpu_freq_set(CPU_FREQ_LOW);
+         #ifdef CPU_SCALING
+          rtc_clk_cpu_freq_set(CPU_FREQ_LOW);
+         #endif
          flip = 0;
          nextPreset();  //Flip through presets.
         } else {
