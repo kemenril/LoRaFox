@@ -33,8 +33,8 @@ https://docs.heltec.cn/#/en/user_manual/how_to_install_esp32_Arduino
 ### Buid settings for the Arduino IDE:
 
    * Board: **Heltec WiFi LoRa 32 V2** (probably, or you could try something else, like **TTGO LoRa32-OLED V1**, or whatever matches your board.)
-   * CPU Frequency: **40Mhz** (It will automatically be raised to 80 at times for responsiveness.)
-   * Flash Frequency: Also **40Mhz**
+   * CPU Frequency: **40Mhz** (It will automatically be raised to 80 at times for responsiveness.), or anything you like if you *#undef CPU_SCALING* in the code.
+   * Flash Frequency: Also **40Mhz**, ... or whatever.
    * Partition Scheme: **Default 8MB** (... or whatever, it doesn't use enough resources to matter)
 
 ### Wiring the Heltec WiFi LoRa 32 or TTGO LoRa 32 modules
@@ -48,6 +48,8 @@ For the **TTGO LoRa32 V2**: LoRa_DIO2 (which is apparently separate on the board
 ... the schematic for a component-bulit version shows DIO2 connected to pin 12 and should work as shown.
 
 Nothing here will prevent you from programming the sketch into an empty board, but you won't get FM from it until you connect pin DIO2 to the right place.
+
+**WARNING:** There is a clone TTGO module on ebay that is very cheap, something like $11 USD, but does not have DIO2 connected at all.  Unless you're comfortable soldering that -- and on this board, the SX1278 is a 5x5mm QFN package with about 0.3mm pin pitch -- pay the extra few dollars and get a Heltec or TTGO or some other board with the pin attached to something.  If you ***are*** comfortable soldering it, feel free.  I've done it.  It does work.  You'll probably want to use the TTGO V1 board model and disable CPU scaling in the code.
 
 ### Starting the beacon for the first time
 
