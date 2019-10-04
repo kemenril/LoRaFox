@@ -41,7 +41,7 @@ https://docs.heltec.cn/#/en/user_manual/how_to_install_esp32_Arduino
 
 The pre-built modules often have pin DIO2 of their SX1278 chip attached to GPIO pin 32.  Pin 32 on an ESP32 is input-only, and is useless for our purposes when we're trying to use it to send the modulation signal into the FSK modem.  You'll need to run a jumper wire from pin 32 to the pin defined as RADIO_MOD_ALT in the sketch.  At the moment, this is set to GPIO12.  You can change it if you like, but I picked this pin because it is more or less empty otherwise and easy to reach from pin 32.  In the TTGO LoRa32 V2 module, pin DIO2 is just dangling off of the edge of the board somewhere, and not really attached to anything as far as I can tell.  You'll also need to run a jumper wire for this arrangement.  Connect the following points on the board.
 
-For the **Heltec WiFi LoRa V2**, probably the **WiFi LoRa V1**, and the **TTGO LoRa32 V1** and **TTGO LoRa** modules: 34 -> 12
+For the **Heltec WiFi LoRa V2**, probably the **WiFi LoRa V1**, and the **TTGO LoRa32 V1** and **TTGO LoRa** modules: 34 -> 12, probably.  The internet isn't exactly clear on this.  If 34 doesn't work, you can try pin 32.
 
 For the **TTGO LoRa32 V2**: LoRa_DIO2 (which is apparently separate on the board) -> 12
 
