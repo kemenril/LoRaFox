@@ -28,6 +28,7 @@ https://docs.heltec.cn/#/en/user_manual/how_to_install_esp32_Arduino
 
    * A **Heltec WiFi LoRa 32** (tested)
    * A **TTGO LoRa or LoRa 32** (untested)
+   * A similar enough board to one of the above (One TTGO V1 clone is tested and working, but didn't even have the LoRa transceiver's pin DIO2 hooked into anything.  This board required soldering at a 0.3mm pin pitch to make it work.  Buyer beware.)
    * Something like what's described in the included schematic (also untested for the moment)
    
 ### Buid settings for the Arduino IDE:
